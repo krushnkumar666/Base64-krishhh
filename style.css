@@ -1,0 +1,234 @@
+.App {
+  background-color: #121212;
+  color: #e0e0e0;
+  height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.side-by-side {
+  display: flex;
+  gap: 20px;
+  flex-grow: 1;
+  margin-bottom: 10px;
+}
+
+.left-box,
+.right-box {
+  flex: 1;
+  background-color: #1e1e1e;
+  border: 1px solid #333;
+  border-radius: 10px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  color: #e0e0e0;
+  overflow: hidden;
+}
+
+textarea,
+pre {
+  background-color: #121212;
+  border: 1px solid #444;
+  color: #eee;
+  font-family: monospace;
+  font-size: 14px;
+  padding: 10px;
+  border-radius: 6px;
+  resize: none;
+  flex-grow: 1;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  overflow-wrap: break-word;
+  overflow-y: auto;
+}
+
+/* Buttons container */
+.action-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+  justify-content: flex-start; /* Align left */
+}
+
+/* Buttons */
+.action-button {
+  width: 100px;
+  padding: 8px 0;
+  font-size: 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.decode-button {
+  background-color: #0078d4;
+  color: white;
+}
+
+.decode-button:hover {
+  background-color: #005a9e;
+}
+
+.copy-button {
+  background-color: #28a745;
+  color: white;
+}
+
+.copy-button:hover {
+  background-color: #1e7e34;
+}
+
+/* Footer */
+footer {
+  padding: 10px;
+  background-color: #121212;
+  color: #888;
+  font-size: 14px;
+  text-align: center;
+  border-top: 1px solid #333;
+  margin-top: auto;
+}
+.button-group {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+  justify-content: center;
+}
+
+.button-group button {
+  background-color: #292929;
+  color: #ffffff;
+  border: 1px solid #444;
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+.button-group button:hover {
+  background-color: #0078d4;
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.button-group button.active {
+  background-color: #005fa3;
+  border-color: #0078d4;
+  color: #fff;
+  font-weight: bold;
+  box-shadow: 0 4px 12px rgba(0, 120, 212, 0.3);
+}
+h1 {
+  font-family: "Great Vibes", cursive;
+  font-size: 30px;
+  font-weight: normal;
+  color: #fff;
+  margin-bottom: 20px;
+  margin-top: 0px;
+}
+@font-face {
+  font-family: "EdwardianScript";
+  src: url("/fonts/Edwardian.ttf") format("truetype");
+}
+
+.typing-header {
+  font-family: "Great Vibes", cursive;
+  font-size: 35px;
+  color: white;
+  text-align: center;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid rgba(255, 255, 255, 0.75);
+  width: 0;
+  animation: typingCycle 10s steps(40, end) infinite;
+}
+
+/* Typing + Hold + Reset */
+@keyframes typingCycle {
+  0% {
+    width: 0;
+    border-right-color: rgba(255, 255, 255, 0.75); /* visible cursor */
+  }
+  4.76% {
+    width: 28ch;
+    border-right-color: rgba(
+      255,
+      255,
+      255,
+      0.75
+    ); /* still visible during typing */
+  }
+  5% {
+    border-right-color: transparent; /* hide cursor after typing */
+  }
+  95% {
+    width: 28ch;
+    border-right-color: transparent; /* still hidden */
+  }
+  100% {
+    width: 0;
+    border-right-color: rgba(
+      255,
+      255,
+      255,
+      0.75
+    ); /* show cursor again on next cycle */
+  }
+}
+
+.button-group {
+  display: flex;
+  justify-content: flex-end; /* aligns items to the right */
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.button-group button {
+  padding: 10px 20px;
+  font-weight: bold;
+  font-size: 16px;
+  background-color: #444;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.button-group button:hover {
+  background-color: #666;
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 20px; /* Smaller for mobile */
+    margin-top: 0px;
+    text-align: center;
+    margin-left: -10px;
+  }
+  .h1mobile {
+    margin-bottom: 10px;
+  }
+
+  .typing-header {
+    font-size: 24px; /* Also shrink typing header */
+    width: 100%;
+  }
+
+  .side-by-side {
+    flex-direction: column; /* Stack boxes vertically */
+  }
+}
+
+.greeting {
+  font-weight: bold;
+  font-size: 1rem;
+  color: white;
+}

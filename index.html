@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="fevicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="Base64 and XML decoder tool" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>KRS-Base64</title>
+    <style>
+      .greeting {
+        font-size: 1.1rem;
+        font-weight: bold;
+        color: #4d4c4c;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+      }
+      .greeting:hover {
+        color: #e74c3c;
+        text-decoration: underline;
+        transform: scale(1.05);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="App">
+      <p
+        id="greeting"
+        class="greeting"
+        style="text-align: right; padding-right: 1rem; margin-top: 5px"
+        title="Click to logout"
+      ></p>
+      <div class="h1mobile">
+        <h1 class="typing-header">Decoder tool made for Digiod ...</h1>
+      </div>
+
+      <div class="button-group">
+        <button id="base64Btn" class="active">Base64</button>
+        <button id="xmlBtn">XML to JSON</button>
+      </div>
+
+      <div class="side-by-side">
+        <div class="left-box">
+          <h3 id="inputTitle">Base64 Input</h3>
+          <textarea
+            id="inputText"
+            placeholder="Paste Base64 string..."
+          ></textarea>
+          <button class="decodebtn" onclick="handleDecode()">Decode</button>
+          <p id="error" class="error"></p>
+        </div>
+
+        <div class="right-box">
+          <h3 id="outputTitle">Decoded Output</h3>
+          <pre id="outputText"></pre>
+          <button class="copy-button" onclick="handleCopy()">
+            Copy Output
+          </button>
+          <p id="copyStatus" class="copy-status"></p>
+        </div>
+      </div>
+
+      <footer>
+        <p>
+          &copy; <span id="year"></span> | Created by Krushnkumar Bawalge |
+          Base64 + XML Decoder Tool
+        </p>
+      </footer>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pako/2.1.0/pako.min.js"></script>
+    <script src="https://unpkg.com/xml-js@1.6.11/dist/xml-js.min.js"></script>
+    <script src="script.js"></script>
+
+    <script>
+      const username = localStorage.getItem("username");
+      const loginTime = localStorage.getItem("loginTime");
+
+      if (!username || !loginTime) {
+        window.location.href = "login.html";
+      } else {
+        const now = Date.now();
+        const TEN_MIN = 10 * 60 * 1000;
+
+        if (now - loginTime > TEN_MIN) {
+          alert("Session expired. Please login again.");
+          localStorage.clear();
+          window.location.href = "login.html";
+        } else {
+          document.getElementById("greeting").textContent =
+            getGreeting(username);
+        }
+
+        // Auto logout after 10 minutes
+        setTimeout(() => {
+          alert("Session expired. Please login again.");
+          localStorage.clear();
+          window.location.href = "login.html";
+        }, TEN_MIN - (now - loginTime));
+      }
+
+      // Logout when clicking the greeting
+      document.getElementById("greeting").addEventListener("click", () => {
+        const confirmLogout = confirm("Do you want to log out?");
+        if (confirmLogout) {
+          localStorage.clear();
+          window.location.href = "login.html";
+        }
+      });
+
+      function getGreeting(name) {
+        const hour = new Date().getHours();
+        let greeting;
+
+        if (hour >= 5 && hour < 12) {
+          greeting = "Good Morning";
+        } else if (hour >= 12 && hour < 17) {
+          greeting = "Good Afternoon";
+        } else if (hour >= 17 && hour < 21) {
+          greeting = "Good Evening";
+        } else {
+          greeting = "Good Night";
+        }
+
+        return `${greeting}, ${name} 😎`;
+      }
+
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>
